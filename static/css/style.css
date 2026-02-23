@@ -1,12 +1,14 @@
-
 :root {
     --primary: #6366f1;
     --primary-hover: #4f46e5;
     --bg-dark: #0f172a;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-bg: rgba(30, 41, 59, 0.6);
     --text-main: #f8fafc;
     --text-dim: #94a3b8;
+    --success: #10b981;
+    --accent: #a855f7;
     --gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -49,38 +51,43 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 900px;
     padding: 2rem;
     z-index: 1;
 }
 
 header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .gradient-text {
     background: var(--gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 3.5rem);
     font-weight: 800;
     margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
 }
 
 .subtitle {
     color: var(--text-dim);
     font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .input-group {
@@ -164,14 +171,105 @@ button:hover {
 }
 
 .result-card h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* ATS Score Circular Gauge */
+.ats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: conic-gradient(var(--success) var(--score-percent, 0%), rgba(255, 255, 255, 0.05) 0%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     margin-bottom: 1rem;
+    transition: --score-percent 1s ease;
+}
+
+.score-circle::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: var(--bg-dark);
+    border-radius: 50%;
+}
+
+.score-value {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--success);
+}
+
+.section-title {
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin-bottom: 0.75rem;
     font-weight: 700;
 }
 
-.feedback-content {
-    line-height: 1.6;
-    color: #e2e8f0;
-    white-space: pre-line;
+.summary-text {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.skill-tag {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #c7d2fe;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.improvements-list {
+    list-style: none;
+}
+
+.improvement-item {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border-left: 3px solid var(--accent);
+}
+
+.improvement-item::before {
+    content: "💡";
 }
 
 .loader-overlay {
