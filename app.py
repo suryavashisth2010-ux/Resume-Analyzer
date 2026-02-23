@@ -74,11 +74,7 @@ Ensure the response is ONLY valid JSON.
 
         # Verified list of available models for this specific API key
         available_models = [
-            "gemini-2.0-flash",
-            "gemini-2.0-flash-lite",
-            "gemini-pro-latest",
-            "gemini-flash-latest",
-            "gemini-2.5-flash"
+            "gemini-2.0-flash"
         ]
 
         last_error = None
