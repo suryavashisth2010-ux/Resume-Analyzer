@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import PyPDF2
 import os
@@ -32,12 +32,8 @@ def extract_text(file):
 # ---------------- FRONTEND ROUTES ----------------
 @app.route("/")
 def index():
-    return send_from_directory("frontend", "index.html")
-
-@app.route("/<path:path>")
-def static_files(path):
-    return send_from_directory("frontend", path)
-
+    return
+render_template("index.html")
 # ---------------- ANALYZE ROUTE ----------------
 @app.route("/analyze", methods=["POST"])
 def analyze():
