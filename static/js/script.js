@@ -1,10 +1,13 @@
-
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('resume');
 const fileNameDisplay = document.getElementById('fileNameDisplay');
 const uploadForm = document.getElementById('uploadForm');
 const resultCard = document.getElementById('resultCard');
-const feedbackContent = document.getElementById('feedbackContent');
+const atsScore = document.getElementById('atsScore');
+const scoreCircle = document.getElementById('scoreCircle');
+const summaryText = document.getElementById('summaryText');
+const skillsContainer = document.getElementById('skillsContainer');
+const improvementsList = document.getElementById('improvementsList');
 const loader = document.getElementById('loader');
 const jobTypeInput = document.getElementById('jobType');
 const loaderMessage = document.getElementById('loaderMessage');
@@ -58,7 +61,37 @@ uploadForm.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            feedbackContent.innerHTML = data.feedback;
+            // Update ATS Score
+            const score = data.ats_score || 0;
+            atsScore.textContent = score;
+            scoreCircle.style.setProperty('--score-percent', `${score}%`);
+
+            // Set circle color based on score
+            if (score > 80) scoreCircle.style.setProperty('--success', '#10b981');
+            else if (score > 50) scoreCircle.style.setProperty('--success', '#f59e0b');
+            else scoreCircle.style.setProperty('--success', '#ef4444');
+
+            // Update Summary
+            summaryText.textContent = data.summary;
+
+            // Update Skills
+            skillsContainer.innerHTML = '';
+            (data.skills || []).forEach(skill => {
+                const tag = document.createElement('span');
+                tag.className = 'skill-tag';
+                tag.textContent = skill;
+                skillsContainer.appendChild(tag);
+            });
+
+            // Update Improvements
+            improvementsList.innerHTML = '';
+            (data.improvements || []).forEach(tip => {
+                const item = document.createElement('div');
+                item.className = 'improvement-item';
+                item.textContent = tip;
+                improvementsList.appendChild(item);
+            });
+
             resultCard.classList.remove('hidden');
         } else {
             alert(`Error: ${data.error}`);
@@ -78,4 +111,11 @@ function resetApp() {
     uploadForm.reset();
     fileNameDisplay.textContent = "Drag and drop your PDF resume here or click to browse";
     dropZone.style.borderColor = "rgba(255, 255, 255, 0.15)";
+
+    // Clear dynamic fields
+    atsScore.textContent = '0';
+    scoreCircle.style.setProperty('--score-percent', '0%');
+    summaryText.textContent = '';
+    skillsContainer.innerHTML = '';
+    improvementsList.innerHTML = '';
 }
