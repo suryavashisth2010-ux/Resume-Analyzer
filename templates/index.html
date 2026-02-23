@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyser | Unlock Your Potential</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="glass-bg"></div>
+    <div class="container">
+        <header>
+            <h1 class="gradient-text">Resume Analyser</h1>
+            <p class="subtitle">Get professional AI-driven feedback for your career journey.</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <form id="uploadForm">
+                    <div class="input-group">
+                        <label for="jobType">Target Job Role</label>
+                        <input type="text" id="jobType" placeholder="e.g. Software Engineer, Product Manager" required>
+                    </div>
+
+                    <div class="upload-area" id="dropZone">
+                        <input type="file" id="resume" accept=".pdf" hidden>
+                        <div class="upload-content">
+                            <span class="upload-icon">📄</span>
+                            <p id="fileNameDisplay">Drag and drop your PDF resume here or click to browse</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="analyzeBtn">Analyze Resume</button>
+                </form>
+            </div>
+
+            <div id="resultCard" class="card result-card hidden">
+                <h2>AI Analysis Result</h2>
+                <div id="feedbackContent" class="feedback-content"></div>
+                <button onclick="resetApp()" class="secondary-btn">Analyze Another</button>
+            </div>
+        </main>
+
+        <div id="loader" class="loader-overlay hidden">
+            <div class="spinner"></div>
+            <p id="loaderMessage">Analysing your profile...</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
