@@ -32,8 +32,7 @@ def extract_text(file):
 # ---------------- FRONTEND ROUTES ----------------
 @app.route("/")
 def index():
-    return
-    render_template("index.html")
+    return render_template("index.html")
 # ---------------- ANALYZE ROUTE ----------------
 @app.route("/analyze", methods=["POST"])
 def analyze():
