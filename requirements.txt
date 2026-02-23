@@ -1,7 +1,6 @@
-flask_cors
 flask
-google-generativeai
+flask-cors
+requests
 python-dotenv
 PyPDF2
 gunicorn
-requests
