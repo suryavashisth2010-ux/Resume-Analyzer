@@ -151,10 +151,3 @@ Please respond like a human:
         print("GEMINI / SERVER ERROR:", e)
         return jsonify({"error": str(e)}), 500
 
-# ---------------- RUN SERVER ----------------
-if __name__ == "__main__":
-    if not GEMINI_API_KEY:
-        print("Error: GEMINI_API_KEY is missing in .env")
-    else:
-        print("Gemini API key loaded:", True)
-    app.run(debug=True)
