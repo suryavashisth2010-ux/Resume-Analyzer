@@ -6,12 +6,10 @@ import requests
 import time
 import json
 
-# ---------------- LOAD ENV ----------------
-load_dotenv()
-
 app = Flask(__name__)
 CORS(app)
 
+GEMINI_API_KEY= os.getenv("GEMINI_API_KEY")
 
 # ---------------- PDF TEXT EXTRACTION ----------------
 def extract_text(file):
